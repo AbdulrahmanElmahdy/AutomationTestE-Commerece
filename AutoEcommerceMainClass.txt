@@ -1,0 +1,119 @@
+package main.classes;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import locators.ClickChoose;
+import locators.InsertData;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+import static javax.swing.UIManager.get;
+import static org.junit.Assert.*;
+
+public class AutoEcommerce
+{
+
+    public static void main(String[] args) throws InterruptedException {
+
+        // Navigate to E-Commerce Website
+        WebDriverManager.edgedriver().setup();
+        WebDriver driver;
+        driver= new EdgeDriver(new EdgeDriverService.Builder().usingPort(9515).build());
+        driver.get("https://demo.nopcommerce.com/");
+
+        Thread.sleep(6000);
+
+        // Registration Steps
+        ClickChoose clicho = new ClickChoose();
+        InsertData insdat = new InsertData();
+        Thread.sleep(4000);
+
+        clicho.resister(driver).click();
+        Thread.sleep(4000);
+
+        clicho.gender(driver).click();
+        insdat.insertFrstName(driver).sendKeys("Abdulrahman");
+        insdat.insertLasName(driver).sendKeys("Amer");
+        clicho.dayDropDown(driver);
+        clicho.monthDropDown(driver);
+        clicho.yearDropDown(driver);
+        insdat.email(driver).sendKeys("abd.ulrahman@outlook.com");
+        insdat.insertPwd(driver).sendKeys("Ab@94#22");
+        insdat.insertPwdConf(driver).sendKeys("Ab@94#22");
+        clicho.clickReg(driver).click();
+        Thread.sleep(4000);
+
+        String expectedResult = String.valueOf(driver.findElement(By.linkText("Your registration completed")));
+        String actualResult = String.valueOf(driver.findElement(By.className("result")));
+//        Assert.assertTrue(expectedResult.equals(actualResult),"Registered Successfully");
+        Assert.assertEquals(actualResult,expectedResult);
+
+
+        // Login steps
+        clicho.loginBClick(driver).click();
+        insdat.loginEmailinst(driver).sendKeys("abd.ulrahman@outlook.com");
+        insdat.loginPwdinst(driver).sendKeys("Ab@94#22");
+        clicho.clickLoginButton(driver).click();
+
+        // Forget password
+        clicho.forgetPwd(driver).click();
+        insdat.emailForgetPwd(driver).sendKeys("abd.ulrahman@outlook.com");
+        clicho.recoverButton(driver).click();
+
+        String expectedResult2 = String.valueOf(driver.findElement(By.linkText("Email with instructions has been sent to you.")));
+        String actualResult2 = String.valueOf(driver.findElement(By.className("content")));
+//        Assert.assertTrue(expectedResult2.equals(actualResult2),"Please check your email");
+        Assert.assertEquals(actualResult2,expectedResult2);
+
+       Thread.sleep(8000);
+
+       // Search for product
+       insdat.searchForProduct(driver).sendKeys("Apple");
+       clicho.clickSearchButton(driver).click();
+       clicho.addToCart(driver).click();
+
+       // Choose hover choice when write comupter and Select different tags
+        insdat.searchForProduct(driver).sendKeys("Computer");
+        Thread.sleep(4000);
+        clicho.clickHoverCategories(driver);
+        clicho.selectSpecTagCompu(driver).click();
+        clicho.addToCartCompu(driver).click();
+
+       // Switch between currencies US-Euro
+        clicho.selectCurrencyUS(driver);
+        clicho.selectCurrencyEU(driver);
+
+       // Choose and click Categories
+        clicho.clickCategories(driver).click();
+        clicho.chooseCategories(driver).click();
+
+       // Choose specific category
+        clicho.clickCategoriesButton(driver).click();
+        clicho.clickArrowSpcCat(driver).click();
+        clicho.chooseSpecCategories(driver).click();
+
+       // Add different products to Wishlist
+        clicho.clickCategories(driver).click();
+        clicho.chooseWishCatFrst(driver).click();
+        clicho.clickWishCatFrstBut(driver).click();
+        clicho.chooseWishCatSecd(driver).click();
+        clicho.clickWishCatSecdBut(driver).click();
+
+       // Add different products to compare list
+        clicho.clickCategories(driver).click();
+        clicho.chooseCompCatFrst(driver).click();
+        clicho.clickCompCatFrstBut(driver).click();
+        clicho.chooseCompCatSecd(driver).click();
+        clicho.clickCompCatSecdBut(driver).click();
+
+       // Create successful Order
+        clicho.clickShoppingCart(driver).click();
+        clicho.acceptTearms(driver).click();
+        clicho.clickCheckOut(driver).click();
+        
+    }
+}

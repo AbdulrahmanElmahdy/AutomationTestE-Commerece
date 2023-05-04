@@ -1,0 +1,189 @@
+package locators;
+
+import io.cucumber.java.eo.Se;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class ClickChoose {
+
+    // Registration
+    public static WebElement resister(WebDriver driver)
+    {
+        return driver.findElement(By.tagName("a"));
+    }
+    public static WebElement gender(WebDriver driver)
+    {
+        return driver.findElement(By.id("gender-male"));
+    }
+    public static void dayDropDown(WebDriver driver)
+    {
+        WebElement dayDropDown = driver.findElement(By.name("DateOfBirthDay"));
+        Select dayBirth = new Select(dayDropDown);
+        dayBirth.selectByValue("2");
+    }
+    public static void monthDropDown(WebDriver driver)
+    {
+        WebElement monthDropDown = driver.findElement(By.name("DateOfBirthMonth"));
+        Select monthBirth = new Select(monthDropDown);
+        monthBirth.selectByValue("6");
+    }
+    public static void yearDropDown(WebDriver driver)
+    {
+        WebElement yearDropDown = driver.findElement(By.name("DateOfBirthYear"));
+        Select yearBirth = new Select(yearDropDown);
+        yearBirth.selectByValue("1994");
+    }
+    public static WebElement clickReg(WebDriver driver)
+    {
+        return driver.findElement(By.id("register-button"));
+    }
+
+    // Login
+
+    public static WebElement loginBClick(WebDriver driver)
+    {
+        return driver.findElement(By.className("ico-login"));
+    }
+    public static WebElement clickLoginButton(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Log in"));
+    }
+
+    // Forget Password
+
+    public static WebElement forgetPwd(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Forgot password?"));
+    }
+    public static WebElement recoverButton(WebDriver driver)
+    {
+        return driver.findElement(By.name("send-email"));
+    }
+
+    // Search for product
+    public static WebElement clickSearchButton(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Search"));
+    }
+
+    // Switch between currencies US-Euro
+    public static void selectCurrencyUS(WebDriver driver)
+    {
+        WebElement selectCurrencyUS = driver.findElement(By.id("customerCurrency"));
+        Select chooseCurrencyUS = new Select(selectCurrencyUS);
+        chooseCurrencyUS.selectByVisibleText("US Dollar");
+    }
+    public static void selectCurrencyEU(WebDriver driver)
+    {
+        WebElement selectCurrencyEU = driver.findElement(By.id("customerCurrency"));
+        Select chooseCurrencyEU = new Select(selectCurrencyEU);
+        chooseCurrencyEU.selectByVisibleText("Euro");
+    }
+
+    // Choose and click Categories
+    public static WebElement clickCategories(WebDriver driver)
+    {
+        return driver.findElement(By.className("menu-toggle"));
+    }
+    public static WebElement chooseCategories(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Digital downloads "));
+    }
+
+    // Choose specific category
+    public static WebElement clickCategoriesButton(WebDriver driver)
+    {
+        return driver.findElement(By.className("menu-toggle"));
+    }
+    public static WebElement clickArrowSpcCat(WebDriver driver)
+    {
+        return driver.findElement(By.className("sublist-toggle"));
+    }
+    public static WebElement chooseSpecCategories(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Desktops "));
+    }
+    public static void clickHoverCategories(WebDriver driver)
+    {
+         WebElement clickHoverCategories = driver.findElement(By.className("menu-toggle"));
+         Actions mousehover = new Actions(driver);
+         mousehover.moveToElement(new WebDriverWait(driver, Duration.ofMillis(2000)).until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ui-id-5"))))).perform();
+         new WebDriverWait(driver, Duration.ofMillis(5000)).until(ExpectedConditions.elementToBeClickable(By.linkText("Build your own computer"))).click();
+
+    }
+
+    // Add to cart
+    public static WebElement addToCart(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Add to cart"));
+    }
+    public static WebElement addToCartCompu(WebDriver driver)
+    {
+        return driver.findElement(By.id("add-to-cart-button-1"));
+    }
+
+    // Select different tag
+    public static WebElement selectSpecTagCompu(WebDriver driver)
+    {
+        return driver.findElement(By.id("product_attribute_5_11"));
+    }
+
+    // Add to wishlist
+    public static WebElement chooseWishCatFrst(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Books "));
+    }
+    public static WebElement chooseWishCatSecd(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Jewelry "));
+    }
+    public static WebElement clickWishCatFrstBut(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Add to wishlist"));
+    }
+    public static WebElement clickWishCatSecdBut(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Add to wishlist"));
+    }
+
+    // Add to compare
+    public static WebElement chooseCompCatFrst(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Books "));
+    }
+    public static WebElement chooseCompCatSecd(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Jewelry "));
+    }
+    public static WebElement clickCompCatFrstBut(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Add to compare list"));
+    }
+    public static WebElement clickCompCatSecdBut(WebDriver driver)
+    {
+        return driver.findElement(By.linkText("Add to compare list"));
+    }
+
+    // Create successful Order
+    public static WebElement clickShoppingCart(WebDriver driver)
+    {
+        return driver.findElement(By.className("cart-label"));
+    }
+    public static WebElement acceptTearms(WebDriver driver)
+    {
+        return driver.findElement(By.id("termsofservice"));
+    }
+
+    public static WebElement clickCheckOut(WebDriver driver)
+    {
+        return driver.findElement(By.id("checkout"));
+    }
+
+}
